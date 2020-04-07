@@ -36,7 +36,7 @@ lib/lib_cordic.a: obj/lib_cordic.o
 
 bin/%: analysis/%.cpp
 	@ mkdir -p bin
-	$(CC) -std=gnu++11 $< -o $@ -I$(SOFTPOSITPATH)/source/include -I./include $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a lib/lib_cordic.a -lmpfr -lgmp 
+	$(CC) -std=gnu++11 -I$(SOFTPOSITPATH)/source/include -I./include $< -o $@ lib/lib_cordic.a $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a -lmpfr -lgmp
 
 
 
