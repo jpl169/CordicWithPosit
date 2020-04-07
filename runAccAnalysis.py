@@ -5,7 +5,7 @@ import subprocess
 
 binDir = "bin"
 analysisDataDir = "analysisData"
-accDataDir = os.path.join(analysisDataDir, "forSimpleAccuracy")
+accDataDir = os.path.join(analysisDataDir, "forAccuracy")
 cordics = [
     "float_cordic",
     "posit_cordic_default",
@@ -13,7 +13,7 @@ cordics = [
     "posit_cordic_start_late",
     "posit_cordic_quirez_start_late"]
 
-cordic_estimated = [
+cordics_estimated = [
     "2 hours",
     "8 hours",
     "8 hours",
@@ -51,7 +51,7 @@ for (v, e) in zip(vectors, vectors_estimated) :
     proc = subprocess.Popen(["time", exeString, atanString])
     proc.communicate()
 
-for (c, e) in (cordics, cordics_estimated) :
+for (c, e) in zip(cordics, cordics_estimated) :
     # construct executable path
     exeString = os.path.join(binDir, c)
     # construct sin data path
