@@ -37,7 +37,7 @@ vectors_estimated = [
 # Create analysis data folder
 if not os.path.exists(analysisDataDir) :
     os.makedirs(analysisDataDir)
-if not os.path.exists(accDataDir);
+if not os.path.exists(accDataDir) :
     os.makedirs(accDataDir);
 
 for (v, e) in zip(vectors, vectors_estimated) :
