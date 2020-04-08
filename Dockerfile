@@ -25,7 +25,7 @@ RUN git clone https://gitlab.com/cerlane/SoftPosit.git && \
     cd SoftPosit/build/Linux-x86_64-GCC/ && \
     make && \
     cd ../../.. && \
-    RUN git clone https://github.com/jpl169/CordicWithPosit.git && \
+    git clone https://github.com/jpl169/CordicWithPosit.git && \
     cd CordicWithPosit && \
     make
 
