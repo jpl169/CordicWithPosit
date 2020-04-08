@@ -20,15 +20,15 @@ endIndex = 98
 theta = []
 sin_default = []
 sin_quirez = []
-sin_start_late = []
-sin_quirez_start_late = []
+sin_ff = []
+sin_quirez_ff = []
 sin_float = []
 sin_mpfr = []
 
 sin_default_abs = []
 sin_quirez_abs = []
-sin_start_late_abs = []
-sin_quirez_start_late_abs = []
+sin_ff_abs = []
+sin_quirez_ff_abs = []
 sin_float_abs = []
 
 
@@ -38,21 +38,21 @@ for line in sinFile:
     theta.append(float(splitted[0]))
     sin_default.append(float(splitted[1]))
     sin_quirez.append(float(splitted[2]))
-    sin_start_late.append(float(splitted[3]))
-    sin_quirez_start_late.append(float(splitted[4]))
+    sin_ff.append(float(splitted[3]))
+    sin_quirez_ff.append(float(splitted[4]))
     sin_float.append(float(splitted[5]))
     sin_mpfr.append(float(splitted[6]))
 
     sin_default_abs.append(abs(float(splitted[1]) - float(splitted[6])))
     sin_quirez_abs.append(abs(float(splitted[2]) - float(splitted[6])))
-    sin_start_late_abs.append(abs(float(splitted[3]) - float(splitted[6])))
-    sin_quirez_start_late_abs.append(abs(float(splitted[4]) - float(splitted[6])))
+    sin_ff_abs.append(abs(float(splitted[3]) - float(splitted[6])))
+    sin_quirez_ff_abs.append(abs(float(splitted[4]) - float(splitted[6])))
     sin_float_abs.append(abs(float(splitted[5]) - float(splitted[6])))
 
 plt.rcParams.update({'font.size': 9})
 
 plt.scatter(theta[beginIndex:endIndex], sin_mpfr[beginIndex:endIndex], color='xkcd:grey', marker = "o", label="Real", s = 70)
-plt.scatter(theta[beginIndex:endIndex], sin_quirez_start_late[beginIndex:endIndex], color='k', marker = "*", label="Our CORDIC (posit)")
+plt.scatter(theta[beginIndex:endIndex], sin_quirez_ff[beginIndex:endIndex], color='k', marker = "*", label="Our CORDIC (posit)")
 plt.scatter(theta[beginIndex:endIndex], sin_float[beginIndex:endIndex], color='b', marker = "x", label="Naive CORDIC (float)")
 plt.ylim(2.55 * pow(10, -6), 4 * pow(10, -6))
 plt.xlim(1.57079245, 1.57079365)

@@ -29,9 +29,9 @@ int main(int argc, char** argv) {
         fprintf(cos_file, "%.50e, ", xr.toDouble());
         posit_cordic_quirez(prad, 50, xr, yr);
         fprintf(cos_file, "%.50e, ", xr.toDouble());
-        posit_cordic_start_late(prad, 50, xr, yr);
+        posit_cordic_ff(prad, 50, xr, yr);
         fprintf(cos_file, "%.50e, ", xr.toDouble());
-        posit_cordic_quirez_start_late(prad, 50, xr, yr);
+        posit_cordic_quirez_ff(prad, 50, xr, yr);
         fprintf(cos_file, "%.50e, ", xr.toDouble());
         
         float fxr, fyr;

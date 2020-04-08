@@ -1,5 +1,5 @@
-#include "scaled.h"
 #include "cordic.h"
+#include "scaled.h"
 
 void InitializeExperimentAnaly(Analy& a) {
     a.analysisCount = 0;
@@ -170,75 +170,61 @@ void PrintTotalExperimentAnaly(Analy& a, FILE* ofile) {
 }
 
 int main(int argc, char** argv) {
-    FILE* posit_sin_file;
-    FILE* posit_cos_file;
+    FILE* posit_vector_file;
     
-    if (argc == 3) {
-        posit_sin_file = fopen(argv[1], "w+");
-        posit_cos_file = fopen(argv[2], "w+");
+    if (argc == 2) {
+        posit_vector_file = fopen(argv[1], "w+");
     } else {
-        posit_sin_file = fopen("posit_default_sin.txt", "w+");
-        posit_cos_file = fopen("posit_default_cos.txt", "w+");
+        posit_vector_file = fopen("posit_vector_default.txt", "w+");
     }
 
-    unsigned int analysisStep = 32768;
-    double mpfr_resDoubleSin, mpfr_resDoubleCos;
-    mpfr_t mrad, mResSin, mResCos;
-    mpfr_init2(mrad, 256);
-    mpfr_init2(mResSin, 256);
-    mpfr_init2(mResCos, 256);
+    unsigned int analysisStep = 65536;
+    mpfr_t my, mresult, one;
+    mpfr_init2(my, 256);
+    mpfr_init2(mresult, 256);
+    mpfr_init2(one, 256);
+    mpfr_set_d(one, 1.0, MPFR_RNDN);
 
-    posit32 stepLB, prad;
+    posit32 stepLB, py;
 
     Analy a;
-    Analy b;
     InitializeExperimentAnaly(a);
-    InitializeExperimentAnaly(b);
-    PrintExperimentAnalyInfo(posit_sin_file);
-    PrintExperimentAnalyInfo(posit_cos_file);
+    PrintExperimentAnalyInfo(posit_vector_file);
 
-    for (prad = 0.0;
-         prad <= 1.5707963267948965579989817342720925807952880859375;
-            prad.value = prad.value + 100) {
-        if (a.currCount == 0) stepLB = prad;
-        posit32 dx, dy, qsx, qsy;
+    for (py = 0.0; py.value <= 0x7FFFFFFF; py.value = py.value + 1) {
+        if (a.currCount == 0) stepLB = py;
+        posit32 presult;
 
-        posit_cordic_quirez_start_late(prad, 50, dx, dy);
-        mpfr_set_d(mrad, prad.toDouble(), MPFR_RNDN);
-        mpfr_sin(mResSin, mrad, MPFR_RNDN);
-        mpfr_cos(mResCos, mrad, MPFR_RNDN);
-        posit32 pResFromMpfrSin = mpfr_get_d(mResSin, MPFR_RNDN);
-        posit32 pResFromMpfrCos = mpfr_get_d(mResCos, MPFR_RNDN);
-        mpfr_resDoubleSin = mpfr_get_d(mResSin, MPFR_RNDN);
-        mpfr_resDoubleCos = mpfr_get_d(mResCos, MPFR_RNDN);
-        UpdateCurrExperimentAnaly(a, dy, pResFromMpfrSin, mpfr_resDoubleSin);
-        UpdateCurrExperimentAnaly(b, dx, pResFromMpfrCos, mpfr_resDoubleCos);
+        presult = posit_vector_ff(1.0, py, 50);
+        
+        mpfr_set_d(my, py.toDouble(), MPFR_RNDN);
+        mpfr_atan2(mresult, my, one, MPFR_RNDN);
+        double mpfr_resDoubleAtan = mpfr_get_d(mresult, MPFR_RNDN);
+        posit32 pResFromMpfrAtan = mpfr_resDoubleAtan;
+        UpdateCurrExperimentAnaly(a, presult, pResFromMpfrAtan, mpfr_resDoubleAtan);
 
         if (a.currCount == analysisStep) {
-            PrintCurrExperimentAnaly(a, stepLB, prad, posit_sin_file);
+            PrintCurrExperimentAnaly(a, stepLB, py, posit_vector_file);
             UpdateTotalAndClearCurrExperimentAnaly(a);
-            PrintCurrExperimentAnaly(b, stepLB, prad, posit_cos_file);
-            UpdateTotalAndClearCurrExperimentAnaly(b);
         }
+        
+        if (py.value == 0x7FFFFFFF) break;
+        
     }
     
     // Final leftover partial analysis:
     if (a.currCount > 0) {
-        PrintCurrExperimentAnaly(a, stepLB, prad, posit_sin_file);
+        PrintCurrExperimentAnaly(a, stepLB, py, posit_vector_file);
         UpdateTotalAndClearCurrExperimentAnaly(a);
-        PrintCurrExperimentAnaly(b, stepLB, prad, posit_cos_file);
-        UpdateTotalAndClearCurrExperimentAnaly(b);
     }
     
-    PrintTotalExperimentAnaly(a, posit_sin_file);
-    PrintTotalExperimentAnaly(b, posit_cos_file);
+    PrintTotalExperimentAnaly(a, posit_vector_file);
 
-    mpfr_clear(mrad);
-    mpfr_clear(mResSin);
-    mpfr_clear(mResCos);
+    mpfr_clear(my);
+    mpfr_clear(mresult);
+    mpfr_clear(one);
 
-    fclose(posit_sin_file);
-    fclose(posit_cos_file);
+    fclose(posit_vector_file);
     
     return 0;
 }

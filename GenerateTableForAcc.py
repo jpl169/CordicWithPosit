@@ -32,15 +32,15 @@ cordics = [
     "float_cordic",
     "posit_cordic_default",
     "posit_cordic_quirez",
-    "posit_cordic_start_late",
-    "posit_cordic_quirez_start_late"]
+    "posit_cordic_ff",
+    "posit_cordic_quirez_ff"]
 
 vectors = [
     "float_vector",
     "posit_vector_default",
     "posit_vector_quirez",
-    "posit_vector_start_late",
-    "posit_vector_quirez_start_late"]
+    "posit_vector_ff",
+    "posit_vector_quirez_ff"]
 
 if not os.path.exists(tableDataDir) :
     os.makedirs(tableDataDir)

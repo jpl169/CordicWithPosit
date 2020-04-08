@@ -199,11 +199,11 @@ int main(int argc, char** argv) {
 
     for (prad = 0.0;
          prad <= 1.5707963267948965579989817342720925807952880859375;
-            prad.value = prad.value + 1) {
+            prad.value = prad.value + 100) {
         if (a.currCount == 0) stepLB = prad;
         posit32 dx, dy, qsx, qsy;
 
-        posit_cordic_start_late(prad, 50, dx, dy);
+        posit_cordic_ff(prad, 50, dx, dy);
         mpfr_set_d(mrad, prad.toDouble(), MPFR_RNDN);
         mpfr_sin(mResSin, mrad, MPFR_RNDN);
         mpfr_cos(mResCos, mrad, MPFR_RNDN);

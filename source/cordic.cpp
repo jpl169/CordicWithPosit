@@ -667,7 +667,7 @@ void posit_cordic_quirez(posit32 z, int n, posit32& xr, posit32& yr) {
     yr = y;
 }
 
-void posit_cordic_start_late(posit32 z, int n, posit32& xr, posit32& yr) {
+void posit_cordic_ff(posit32 z, int n, posit32& xr, posit32& yr) {
     if (n < 17) {
         printf("We require n >= 17.\n");
         exit(0);
@@ -700,7 +700,7 @@ void posit_cordic_start_late(posit32 z, int n, posit32& xr, posit32& yr) {
 }
 
 // What happens if we use quire for z and start at the latest iteration possible?
-void posit_cordic_quirez_start_late(posit32 z, int n, posit32& xr, posit32& yr) {
+void posit_cordic_quirez_ff(posit32 z, int n, posit32& xr, posit32& yr) {
     if (n < 17) {
         printf("We require n >= 17.\n");
         exit(0);
@@ -783,7 +783,7 @@ posit32 posit_vector_quirez(posit32 x, posit32 y, int n) {
 }
 
 // What happens if we start at the latest iteration possible?
-posit32 posit_vector_start_late(posit32 x, posit32 y, int n) {
+posit32 posit_vector_ff(posit32 x, posit32 y, int n) {
     posit32 di, z = 0.0;
     
     int xExp = GetExponentValueForPosReals(x.value);
@@ -812,7 +812,7 @@ posit32 posit_vector_start_late(posit32 x, posit32 y, int n) {
 }
 
 // What happens if we use quire for z and start at the latest iteration possible?
-posit32 posit_vector_quirez_start_late(posit32 x, posit32 y, int n) {
+posit32 posit_vector_quirez_ff(posit32 x, posit32 y, int n) {
     posit32 di;
     quire32 qz;
     

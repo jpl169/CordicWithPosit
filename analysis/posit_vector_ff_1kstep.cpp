@@ -191,11 +191,11 @@ int main(int argc, char** argv) {
     InitializeExperimentAnaly(a);
     PrintExperimentAnalyInfo(posit_vector_file);
 
-    for (py = 0.0; py.value <= 0x7FFFFFFF; py.value = py.value + 1) {
+    for (py = 0.0; py.value <= 0x7FFFFFFF; py.value = py.value + 100) {
         if (a.currCount == 0) stepLB = py;
         posit32 presult;
 
-        presult = posit_vector_start_late(1.0, py, 50);
+        presult = posit_vector_ff(1.0, py, 50);
         
         mpfr_set_d(my, py.toDouble(), MPFR_RNDN);
         mpfr_atan2(mresult, my, one, MPFR_RNDN);

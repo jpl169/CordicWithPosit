@@ -203,7 +203,7 @@ int main(int argc, char** argv) {
         if (a.currCount == 0) stepLB = prad;
         posit32 dx, dy, qsx, qsy;
 
-        posit_cordic_quirez_start_late(prad, 50, dx, dy);
+        posit_cordic_ff(prad, 50, dx, dy);
         mpfr_set_d(mrad, prad.toDouble(), MPFR_RNDN);
         mpfr_sin(mResSin, mrad, MPFR_RNDN);
         mpfr_cos(mResCos, mrad, MPFR_RNDN);

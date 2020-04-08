@@ -10,15 +10,15 @@ cordics = [
     "float_cordic_1kstep",
     "posit_cordic_default_1kstep",
     "posit_cordic_quirez_1kstep",
-    "posit_cordic_start_late_1kstep",
-    "posit_cordic_quirez_start_late_1kstep"]
+    "posit_cordic_ff_1kstep",
+    "posit_cordic_quirez_ff_1kstep"]
 
 vectors = [
     "float_vector_1kstep",
     "posit_vector_default_1kstep",
     "posit_vector_quirez_1kstep",
-    "posit_vector_start_late_1kstep",
-    "posit_vector_quirez_start_late_1kstep"]
+    "posit_vector_ff_1kstep",
+    "posit_vector_quirez_ff_1kstep"]
 
 # Create analysis data folder
 if not os.path.exists(analysisDataDir) :

@@ -17,12 +17,12 @@ int GetExponentValueForPosReals(unsigned int);
 void float_cordic(float, int, float&, float&);
 void posit_cordic_default(posit32, int, posit32&, posit32&);
 void posit_cordic_quirez(posit32, int, posit32&, posit32&);
-void posit_cordic_start_late(posit32, int, posit32&, posit32&);
-void posit_cordic_quirez_start_late(posit32, int, posit32&, posit32&);
+void posit_cordic_ff(posit32, int, posit32&, posit32&);
+void posit_cordic_quirez_ff(posit32, int, posit32&, posit32&);
 
 // For computing arctan
 float float_vector(float, float, int);
 posit32 posit_vector_default(posit32, posit32, int);
 posit32 posit_vector_quirez(posit32, posit32, int);
-posit32 posit_vector_start_late(posit32, posit32, int);
-posit32 posit_vector_quirez_start_late(posit32, posit32, int);
+posit32 posit_vector_ff(posit32, posit32, int);
+posit32 posit_vector_quirez_ff(posit32, posit32, int);

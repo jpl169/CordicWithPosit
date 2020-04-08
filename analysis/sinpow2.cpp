@@ -26,9 +26,9 @@ int main(int argc, char** argv) {
         fprintf(sin_file, "%.50e, ", yr.toDouble());
         posit_cordic_quirez(prad, 50, xr, yr);
         fprintf(sin_file, "%.50e, ", yr.toDouble());
-        posit_cordic_start_late(prad, 50, xr, yr);
+        posit_cordic_ff(prad, 50, xr, yr);
         fprintf(sin_file, "%.50e, ", yr.toDouble());
-        posit_cordic_quirez_start_late(prad, 50, xr, yr);
+        posit_cordic_quirez_ff(prad, 50, xr, yr);
         fprintf(sin_file, "%.50e, ", yr.toDouble());
         
         float fxr, fyr;

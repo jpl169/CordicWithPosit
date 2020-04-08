@@ -30,10 +30,10 @@ int main(int argc, char** argv) {
         prad = posit_vector_quirez(xr, yr, 50);
         fprintf(atan_file, "%.50e, ", prad.toDouble());
 
-        prad = posit_vector_start_late(xr, yr, 50);
+        prad = posit_vector_ff(xr, yr, 50);
         fprintf(atan_file, "%.50e, ", prad.toDouble());
 
-        prad = posit_vector_quirez_start_late(xr, yr, 50);
+        prad = posit_vector_quirez_ff(xr, yr, 50);
         fprintf(atan_file, "%.50e, ", prad.toDouble());
         
         float fxr, fyr, frad;
