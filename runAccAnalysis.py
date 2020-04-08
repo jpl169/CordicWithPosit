@@ -48,7 +48,7 @@ for (v, e) in zip(vectors, vectors_estimated) :
 
     print("Executing " + exeString + "...")
     print("Estimated time: " + e)
-    proc = subprocess.Popen(["time", exeString, atanString])
+    proc = subprocess.Popen([exeString, atanString])
     proc.communicate()
 
 for (c, e) in zip(cordics, cordics_estimated) :
@@ -61,7 +61,7 @@ for (c, e) in zip(cordics, cordics_estimated) :
 
     print("Executing " + exeString + "...")
     print("Estimated time: " + e)
-    proc = subprocess.Popen(["time", exeString, sinString, cosString])
+    proc = subprocess.Popen([exeString, sinString, cosString])
     proc.communicate()
 
 

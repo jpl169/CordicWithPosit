@@ -33,7 +33,7 @@ for v in vectors :
     atanString = os.path.join(simpAccDataDir, v + "_atan.txt")
 
     print("Executing " + exeString + "...")
-    proc = subprocess.Popen(["time", exeString, atanString])
+    proc = subprocess.Popen([exeString, atanString])
     proc.communicate()
 
 for c in cordics :
@@ -45,7 +45,7 @@ for c in cordics :
     cosString = os.path.join(simpAccDataDir, c + "_cos.txt")
 
     print("Executing " + exeString + "...")
-    proc = subprocess.Popen(["time", exeString, sinString, cosString])
+    proc = subprocess.Popen([exeString, sinString, cosString])
     proc.communicate()
 
 
