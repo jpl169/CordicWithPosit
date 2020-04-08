@@ -185,14 +185,14 @@ typedef union __float_x{
 
 int main(int argc, char** argv) {
     FILE* float_sin_file;
-    FILE* float_sin_file;
+    FILE* float_cos_file;
     
     if (argc == 3) {
         float_sin_file = fopen(argv[1], "w+");
-        float_sin_file = fopen(argv[2], "w+");
+        float_cos_file = fopen(argv[2], "w+");
     } else {
         float_sin_file = fopen("float_default_sin.txt", "w+");
-        float_sin_file = fopen("float_default_cos.txt", "w+");
+        float_cos_file = fopen("float_default_cos.txt", "w+");
     }
 
     unsigned int analysisStep = 32768;
