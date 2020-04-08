@@ -14,11 +14,11 @@ cordics = [
     "posit_cordic_quirez_start_late"]
 
 cordics_estimated = [
-    "2 hours",
-    "8 hours",
-    "8 hours",
-    "8 hours",
-    "8 hours"]
+    "3.8 hours",
+    "7.9 hours",
+    "9.7 hours",
+    "8.2 hours",
+    "9.9 hours"]
 
 vectors = ["float_vector",
            "posit_vector_default",
@@ -28,11 +28,11 @@ vectors = ["float_vector",
            ]
     
 vectors_estimated = [
-    "2 hours",
-    "13 hours",
-    "13 hours",
-    "13 hours",
-    "13 hours"]
+    "5.3 hours",
+    "11 hours",
+    "13.5 hours",
+    "11.4 hours",
+    "13.8 hours"]
 
 # Create analysis data folder
 if not os.path.exists(analysisDataDir) :

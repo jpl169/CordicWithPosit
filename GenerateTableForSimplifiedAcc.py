@@ -25,8 +25,8 @@ binDir = "bin"
 analysisDataDir = "analysisData"
 simpAccDataDir = os.path.join(analysisDataDir, "forSimpleAccuracy")
 tableDataDir = "table"
-tableDataFile = os.path.join(tableDataDir, "table2table3.txt");
-expectedFile = "expected/table2table3.txt"
+tableDataFile = os.path.join(tableDataDir, "simpleTable2table3.txt");
+expectedFile = "expected/simpleTable2table3.txt"
 
 cordics = [
     "float_cordic_1kstep",
