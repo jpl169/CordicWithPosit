@@ -54,13 +54,13 @@ unsigned long ulpf(float x, float y){
 void UpdateCurrExperimentAnaly(Analy& a, float pRes, float pResFromMpfr, double
 		mpfr_resDouble) {
     
-    double posit_res = pRes;
+    double float_res = pRes;
     
 	//ulp error difference
     unsigned int currUlpDiff = ulpf(pRes, pResFromMpfr);
    
 	//absolute error difference
-	double currAbsDiff = mpfr_resDouble - posit_res;
+	double currAbsDiff = mpfr_resDouble - float_res;
 	if (currAbsDiff < 0) currAbsDiff *= -1;
 
     a.currCount++;
@@ -148,7 +148,7 @@ void PrintExperimentAnalyInfo(FILE* ofile) {
 }
 
 //add fprintf files for cosine and sin
-void PrintCurrExperimentAnaly(Analy& a, posit32 stepLB, posit32 stepUB, FILE* ofile) {
+void PrintCurrExperimentAnaly(Analy& a, float stepLB, float stepUB, FILE* ofile) {
     fprintf(ofile, "Analysis Step Info (%.10e ~ %.10e):\n",
            stepLB.toDouble(), stepUB.toDouble());
     fprintf(ofile, "%u, ", a.currCount);
@@ -184,15 +184,15 @@ typedef union __float_x{
 } float_x;
 
 int main(int argc, char** argv) {
-    FILE* posit_sin_file;
-    FILE* posit_cos_file;
+    FILE* float_sin_file;
+    FILE* float_sin_file;
     
     if (argc == 3) {
-        posit_sin_file = fopen(argv[1], "w+");
-        posit_cos_file = fopen(argv[2], "w+");
+        float_sin_file = fopen(argv[1], "w+");
+        float_sin_file = fopen(argv[2], "w+");
     } else {
-        posit_sin_file = fopen("posit_default_sin.txt", "w+");
-        posit_cos_file = fopen("posit_default_cos.txt", "w+");
+        float_sin_file = fopen("float_default_sin.txt", "w+");
+        float_sin_file = fopen("float_default_cos.txt", "w+");
     }
 
     unsigned int analysisStep = 32768;
@@ -208,8 +208,8 @@ int main(int argc, char** argv) {
     Analy b;
     InitializeExperimentAnaly(a);
     InitializeExperimentAnaly(b);
-    PrintExperimentAnalyInfo(posit_sin_file);
-    PrintExperimentAnalyInfo(posit_cos_file);
+    PrintExperimentAnalyInfo(float_sin_file);
+    PrintExperimentAnalyInfo(float_cos_file);
 
     for (rad.f = 0.0;
          rad.f <= 1.5707963267948965579989817342720925807952880859375;
@@ -231,30 +231,30 @@ int main(int argc, char** argv) {
         UpdateCurrExperimentAnaly(b, dx, pResFromMpfrCos, mpfr_resDoubleCos);
 
         if (a.currCount == analysisStep) {
-            PrintCurrExperimentAnaly(a, stepLB, rad.f, posit_sin_file);
+            PrintCurrExperimentAnaly(a, stepLB, rad.f, float_sin_file);
             UpdateTotalAndClearCurrExperimentAnaly(a);
-            PrintCurrExperimentAnaly(b, stepLB, rad.f, posit_cos_file);
+            PrintCurrExperimentAnaly(b, stepLB, rad.f, float_cos_file);
             UpdateTotalAndClearCurrExperimentAnaly(b);
         }
     }
     
     // Final leftover partial analysis:
     if (a.currCount > 0) {
-        PrintCurrExperimentAnaly(a, stepLB, rad.f, posit_sin_file);
+        PrintCurrExperimentAnaly(a, stepLB, rad.f, float_sin_file);
         UpdateTotalAndClearCurrExperimentAnaly(a);
-        PrintCurrExperimentAnaly(b, stepLB, rad.f, posit_cos_file);
+        PrintCurrExperimentAnaly(b, stepLB, rad.f, float_cos_file);
         UpdateTotalAndClearCurrExperimentAnaly(b);
     }
     
-    PrintTotalExperimentAnaly(a, posit_sin_file);
-    PrintTotalExperimentAnaly(b, posit_cos_file);
+    PrintTotalExperimentAnaly(a, float_sin_file);
+    PrintTotalExperimentAnaly(b, float_cos_file);
 
     mpfr_clear(mrad);
     mpfr_clear(mResSin);
     mpfr_clear(mResCos);
 
-    fclose(posit_sin_file);
-    fclose(posit_cos_file);
+    fclose(float_sin_file);
+    fclose(float_cos_file);
     
     return 0;
 }

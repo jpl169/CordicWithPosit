@@ -54,13 +54,13 @@ unsigned long ulpf(float x, float y){
 void UpdateCurrExperimentAnaly(Analy& a, float pRes, float pResFromMpfr, double
 		mpfr_resDouble) {
     
-    double posit_res = pRes;
+    double float_res = pRes;
     
 	//ulp error difference
     unsigned int currUlpDiff = ulpf(pRes, pResFromMpfr);
    
 	//absolute error difference
-	double currAbsDiff = mpfr_resDouble - posit_res;
+	double currAbsDiff = mpfr_resDouble - float_res;
 	if (currAbsDiff < 0) currAbsDiff *= -1;
 
     a.currCount++;
@@ -148,7 +148,7 @@ void PrintExperimentAnalyInfo(FILE* ofile) {
 }
 
 //add fprintf files for cosine and sin
-void PrintCurrExperimentAnaly(Analy& a, posit32 stepLB, posit32 stepUB, FILE* ofile) {
+void PrintCurrExperimentAnaly(Analy& a, float stepLB, float stepUB, FILE* ofile) {
     fprintf(ofile, "Analysis Step Info (%.10e ~ %.10e):\n",
            stepLB.toDouble(), stepUB.toDouble());
     fprintf(ofile, "%u, ", a.currCount);
