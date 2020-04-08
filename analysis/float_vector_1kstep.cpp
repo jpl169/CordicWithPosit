@@ -206,7 +206,7 @@ int main(int argc, char** argv) {
     InitializeExperimentAnaly(a);
     PrintExperimentAnalyInfo(float_vector_file);
 
-    for (fy.f = 0.0; fy.x < 0x7F800000; fy.x = fy.x + 1000) {
+    for (fy.f = 0.0; fy.x < 0x7F800000; fy.x = fy.x + 100) {
         if (a.currCount == 0) stepLB = fy.f;
         
         float fresult = float_vector(1.0, fy.f, 50);

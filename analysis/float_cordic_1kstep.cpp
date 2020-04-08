@@ -213,7 +213,7 @@ int main(int argc, char** argv) {
 
     for (rad.f = 0.0;
          rad.f <= 1.5707963267948965579989817342720925807952880859375;
-         rad.x = rad.x + 1000) {
+         rad.x = rad.x + 100) {
         
         if (a.currCount == 0) stepLB = rad.f;
         

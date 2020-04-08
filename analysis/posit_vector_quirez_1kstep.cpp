@@ -191,7 +191,7 @@ int main(int argc, char** argv) {
     InitializeExperimentAnaly(a);
     PrintExperimentAnalyInfo(posit_vector_file);
 
-    for (py = 0.0; py.value <= 0x7FFFFFFF; py.value = py.value + 1000) {
+    for (py = 0.0; py.value <= 0x7FFFFFFF; py.value = py.value + 100) {
         if (a.currCount == 0) stepLB = py;
         posit32 presult;
 

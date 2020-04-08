@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
 
     for (prad = 0.0;
          prad <= 1.5707963267948965579989817342720925807952880859375;
-            prad.value = prad.value + 1000) {
+            prad.value = prad.value + 100) {
         if (a.currCount == 0) stepLB = prad;
         posit32 dx, dy, qsx, qsy;
 
