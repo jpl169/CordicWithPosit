@@ -42,6 +42,9 @@ vectors = [
     "posit_vector_start_late_1kstep",
     "posit_vector_quirez_start_late_1kstep"]
 
+if not os.path.exists(tableDataDir) :
+    os.makedirs(tableDataDir)
+
 f = open(tableDataFile, "w+");
 
 ocs = FormatData(GetData(os.path.join(simpAccDataDir, cordics[4] + "_sin.txt")))
