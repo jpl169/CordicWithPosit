@@ -150,7 +150,7 @@ void PrintExperimentAnalyInfo(FILE* ofile) {
 //add fprintf files for cosine and sin
 void PrintCurrExperimentAnaly(Analy& a, float stepLB, float stepUB, FILE* ofile) {
     fprintf(ofile, "Analysis Step Info (%.10e ~ %.10e):\n",
-           stepLB.toDouble(), stepUB.toDouble());
+           stepLB, stepUB);
     fprintf(ofile, "%u, ", a.currCount);
     fprintf(ofile, "%u, ", a.currZeroUlp);
     fprintf(ofile, "%u, ", a.currMaxUlp);
