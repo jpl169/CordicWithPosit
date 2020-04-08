@@ -68,8 +68,8 @@ f.write("{:<15}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}".format("a
 f.write("{:<15}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}".format("# 0 ulp", ocs[1], occ[1], oca[1], ncs[1], ncc[1], nca[1]))
 f.write("{:<15}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}".format("# input", ocs[0], occ[0], oca[0], ncs[0], ncc[0], nca[0]))
 
-f.write()
-f.write()
+f.write("")
+f.write("")
 
 ocs = FormatData(GetData(os.path.join(simpAccDataDir, cordics[4] + "_sin.txt")))
 occ = FormatData(GetData(os.path.join(simpAccDataDir, cordics[4] + "_cos.txt")))
@@ -106,7 +106,7 @@ f.write("{:<15}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}".format("a
 f.write("{:<15}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}".format("max ulp", fcs[2], fcc[2], fca[2], qcs[2], qcc[2], qca[2]))
 f.write("{:<15}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}{:<15.2E}".format("avg ulp", fcs[4], fcc[4], fca[4], qcs[4], qcc[4], qca[4]))
 f.write("{:<15}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}{:<15d}".format("# 0 ulp", fcs[1], fcc[1], fca[1], qcs[1], qcc[1], qca[1]))
-f.write()
+f.write("")
 
 f.close()
 print("Table data output to " + tableDataFile)
