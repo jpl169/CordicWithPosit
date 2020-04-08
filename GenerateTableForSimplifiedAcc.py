@@ -42,7 +42,7 @@ vectors = [
     "posit_vector_start_late_1kstep",
     "posit_vector_quirez_start_late_1kstep"]
 
-f = open(tableDataFile, "w");
+f = open(tableDataFile, "w+");
 
 ocs = FormatData(GetData(os.path.join(simpAccDataDir, cordics[4] + "_sin.txt")))
 occ = FormatData(GetData(os.path.join(simpAccDataDir, cordics[4] + "_cos.txt")))
