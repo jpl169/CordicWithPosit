@@ -30,8 +30,8 @@ typedef struct _analy {
     double currMinAbs;
 
 	// analysis variables for average absolute error
-    double totalAvgAbsCombined;
-    double currAvgAbsCombined;
+    mpfr_t totalAvgAbsCombined;
+    mpfr_t currAvgAbsCombined;
     unsigned long long int totalAvgAbsCount;
     unsigned long long int currAvgAbsCount;
 } Analy;

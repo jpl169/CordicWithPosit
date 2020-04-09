@@ -29,10 +29,10 @@ vectors = ["float_vector",
     
 vectors_estimated = [
     "5.3 hours",
-    "11 hours",
-    "13.5 hours",
-    "11.4 hours",
-    "13.8 hours"]
+    "23.7 hours",
+    "23.9 hours",
+    "24.2 hours",
+    "24.5 hours"]
 
 # Create analysis data folder
 if not os.path.exists(analysisDataDir) :

@@ -30,8 +30,10 @@ void InitializeExperimentAnaly(Analy& a) {
     a.currMinAbs = 0xFFFFFFFF;
 
 	// analysis variables for average absolute error
-    a.totalAvgAbsCombined = 0;
-    a.currAvgAbsCombined = 0;
+    mpfr_init2(a.totalAvgAbsCombined, 2048);
+    mpfr_set_d(a.totalAvgAbsCombined, 0.0, MPFR_RNDN);
+    mpfr_init2(a.currAvgAbsCombined, 2048);
+    mpfr_set_d(a.currAvgAbsCombined, 0.0, MPFR_RNDN);
     a.totalAvgAbsCount = 0;
     a.currAvgAbsCount = 0;
 }
@@ -73,7 +75,7 @@ void UpdateCurrExperimentAnaly(Analy& a, posit32 pRes, posit32 pResFromMpfr, dou
 
 	// analysis variables for average absolute error
     if (!isnan(currAbsDiff) && !isinf(currAbsDiff)) {
-        a.currAvgAbsCombined += currAbsDiff;
+        mpfr_add_d(a.currAvgAbsCombined, a.currAvgAbsCombined, currAbsDiff, MPFR_RNDN);
         a.currAvgAbsCount++;
     }
 	
@@ -102,7 +104,7 @@ void UpdateTotalAndClearCurrExperimentAnaly(Analy& a) {
     if (a.currMinAbs < a.totalMinAbs) a.totalMinAbs = a.currMinAbs;
 
 	// analysis variables for average absolute error
-    a.totalAvgAbsCombined += a.currAvgAbsCombined;
+    mpfr_add(a.totalAvgAbsCombined, a.totalAvgAbsCombined, a.currAvgAbsCombined, MPFR_RNDN);
     a.totalAvgAbsCount += a.currAvgAbsCount;
 	
 	// analysis variables for maximum absolute error
@@ -125,7 +127,7 @@ void UpdateTotalAndClearCurrExperimentAnaly(Analy& a) {
     a.currMinAbs = pow(2, 1000);
 
 	// analysis variables for average absolute error
-    a.currAvgAbsCombined = 0;
+    mpfr_set_d(a.currAvgAbsCombined, 0.0, MPFR_RNDN);
     a.currAvgAbsCount = 0;
 	
 	// analysis variables for maximum absolute error
@@ -149,7 +151,7 @@ void PrintCurrExperimentAnaly(Analy& a, posit32 stepLB, posit32 stepUB, FILE* of
     fprintf(ofile, "%.10e, ", a.currUlpCombined * 1.0 / a.currCount);
     fprintf(ofile, "%.10e, ", a.currMaxAbs);
     fprintf(ofile, "%.10e, ", a.currMinAbs);
-    fprintf(ofile, "%.10e, ", a.currAvgAbsCombined * 1.0 / a.currAvgAbsCount);
+    fprintf(ofile, "%.10e, ", mpfr_get_d(a.currAvgAbsCombined, MPFR_RNDN) / a.currAvgAbsCount);
     fprintf(ofile, "\n\n");
     fflush(ofile);
 }
@@ -164,7 +166,7 @@ void PrintTotalExperimentAnaly(Analy& a, FILE* ofile) {
     fprintf(ofile, "%.10e, ", a.totalUlpCombined * 1.0 / a.analysisCount);
     fprintf(ofile, "%.10e, ", a.totalMaxAbs);
     fprintf(ofile, "%.10e, ", a.totalMinAbs);
-    fprintf(ofile, "%.10e, ", a.totalAvgAbsCombined * 1.0 / a.totalAvgAbsCount);
+    fprintf(ofile, "%.10e, ", mpfr_get_d(a.totalAvgAbsCombined, MPFR_RNDN) / a.totalAvgAbsCount);
     fprintf(ofile, "\n\n");
     fflush(ofile);
 }
@@ -223,6 +225,8 @@ int main(int argc, char** argv) {
     mpfr_clear(my);
     mpfr_clear(mresult);
     mpfr_clear(one);
+    mpfr_clear(a.totalAvgAbsCombined);
+    mpfr_clear(a.currAvgAbsCombined);
 
     fclose(posit_vector_file);
     
