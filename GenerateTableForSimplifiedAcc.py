@@ -114,7 +114,7 @@ print("Table data output to " + tableDataFile)
 # Make sure file is the same as expected file:
 print("Comparing " + " to the expected table data in " + expectedFile)
 contentSame = filecmp.cmp(tableDataFile, expectedFile, shallow=False)
-if expectedFile:
+if contentSame:
     print("The generated data is the same")
 else :
     print("The generated data does not match. Please view " + tableDataFile + " and " + expectedFile + " to view the difference. There may be slight differences between the numbers")
