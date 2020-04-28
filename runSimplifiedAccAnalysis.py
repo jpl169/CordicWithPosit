@@ -10,6 +10,11 @@ def mygrouper(n, iterable):
     args = [iter(iterable)] * n
     return ([e for e in t if e != None] for t in itertools.zip_longest(*args))
 
+if len(sys.argv) == 2 :
+    PARALLEL = int(sys.argv[1])
+    if PARALLEL <= 0 :
+        PARALLEL = 10
+
 binDir = "bin"
 analysisDataDir = "analysisData"
 simpAccDataDir = os.path.join(analysisDataDir, "forSimpleAccuracy")
@@ -59,7 +64,8 @@ for sublist in executeList :
         print("Executing " + exe[0] + " ...")
         proc = subprocess.Popen(exe)
         processes.append(proc)
-
+        
     for proc in processes :
         proc.wait()
+    print("")
 
