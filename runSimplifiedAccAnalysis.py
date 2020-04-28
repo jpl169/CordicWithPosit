@@ -2,6 +2,13 @@ import sys
 import os
 import shutil
 import subprocess
+import itertools
+
+PARALLEL = 4
+
+def mygrouper(n, iterable):
+    args = [iter(iterable)] * n
+    return ([e for e in t if e != None] for t in itertools.zip_longest(*args))
 
 binDir = "bin"
 analysisDataDir = "analysisData"
@@ -26,15 +33,14 @@ if not os.path.exists(analysisDataDir) :
 if not os.path.exists(simpAccDataDir) :
     os.makedirs(simpAccDataDir)
 
+executeList = []
+    
 for v in vectors :
     # construct executable path
     exeString = os.path.join(binDir, v)
     # construct atan data path
     atanString = os.path.join(simpAccDataDir, v + "_atan.txt")
-
-    print("Executing " + exeString + "...")
-    proc = subprocess.Popen([exeString, atanString])
-    proc.communicate()
+    executeList.append([exeString, atanString])
 
 for c in cordics :
     # construct executable path
@@ -43,9 +49,17 @@ for c in cordics :
     sinString = os.path.join(simpAccDataDir, c + "_sin.txt")
     # construct cos data path
     cosString = os.path.join(simpAccDataDir, c + "_cos.txt")
+    executeList.append([exeString, sinString, cosString])
 
-    print("Executing " + exeString + "...")
-    proc = subprocess.Popen([exeString, sinString, cosString])
-    proc.communicate()
+executeList = mygrouper(PARALLEL, executeList)
+    
+for sublist in executeList :
+    processes = []
+    for exe in sublist :
+        print("Executing " + exe[0] + " ...")
+        proc = subprocess.Popen(exe)
+        processes.append(proc)
 
+    for proc in processes :
+        proc.wait()
 
